@@ -130,15 +130,26 @@ Thread.prototype.hide = function () {
 
 
 Thread.prototype.broadcastText = function (text) {
+    var payload = {
+        thread_ids: '[' + this.id + ']',
+        client_context: Helpers.generateUUID()
+    };
+
+    var endpoint = 'threadsBrodcastText';
+    var link_urls = Helpers.extractUrl(text);
+    if (link_urls) {
+        payload.link_text = text;
+        payload.link_urls = JSON.stringify(link_urls);
+        endpoint = 'threadsBrodcastLink';
+    } else {
+        payload.text = text;
+    }
+
     var request = this.request()
         .setMethod('POST')
         .generateUUID()
-        .setResource('threadsBrodcastText')
-        .setData({
-            thread_ids: '[' + this.id + ']',
-            client_context: Helpers.generateUUID(),
-            text: text
-        })
+        .setResource(endpoint)
+        .setData(payload)
         .send()
     return threadsWrapper(this.session, request)
 };
@@ -230,14 +241,14 @@ Thread.getById = function (session, id, cursor) {
 
 Thread.configureText = function(session, users, text) { 
     if(!_.isArray(users)) users = [users];
-    var link_urls = Helpers.extractUrl(text);
-    var endpoint = 'threadsBrodcastText';
 
     var payload = {
       recipient_users: JSON.stringify([users]),
       client_context: Helpers.generateUUID()
     }
 
+    var endpoint = 'threadsBrodcastText';
+    var link_urls = Helpers.extractUrl(text);
     if(link_urls) {
         payload.link_text = text;
         payload.link_urls = JSON.stringify(link_urls);
