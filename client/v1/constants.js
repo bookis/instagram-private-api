@@ -62,6 +62,7 @@ const ROUTES = {
     threads: 'direct_v2/threads/?user_ids=<% JSON.stringify(threads) %>',
     threadsShow: 'direct_v2/threads/<%= threadId %>/<%= cursor ? ("?cursor=" + cursor) : "" %>',
     threadsSeen: 'direct_v2/threads/<%= threadId %>/items/<%= itemId %>/seen/',
+    threadsItemDelete: 'direct_v2/threads/<%= threadId %>/items/<%= itemId %>/delete/',
     threadsApprove: 'direct_v2/threads/<%= threadId %>/approve/',
     threadsHide: 'direct_v2/threads/<%= threadId %>/hide/',
     threadsBrodcastText: 'direct_v2/threads/broadcast/text/',

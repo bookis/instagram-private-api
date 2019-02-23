@@ -129,6 +129,19 @@ Thread.prototype.hide = function () {
 };
 
 
+Thread.prototype.deleteItem = function (itemId) {
+    var that = this;
+    return this.request()
+        .setMethod('POST')
+        .generateUUID()
+        .setResource('threadsItemDelete', {
+            threadId: that.id,
+            itemId: itemId
+        })
+        .send();
+};
+
+
 Thread.prototype.broadcastText = function (text) {
     var payload = {
         thread_ids: '[' + this.id + ']',
