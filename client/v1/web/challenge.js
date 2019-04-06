@@ -256,7 +256,7 @@ exports.EmailVerificationChallenge = EmailVerificationChallenge;
 
 var NotImplementedChallenge = function(session) {
     Challenge.apply(this, arguments);
-    throw new Error("Not implemented, due to missing account for testing, please write me on email `ivan.ivan.90.90@gmail.com`")
+    throw new Error("Unimplemented Challenge request")
 }
 util.inherits(NotImplementedChallenge, Challenge);
 exports.NotImplementedChallenge = NotImplementedChallenge;
