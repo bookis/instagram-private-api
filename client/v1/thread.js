@@ -58,7 +58,9 @@ Thread.prototype.parseParams = function (json) {
             timestamp: parseInt(parseInt(val.timestamp) / 1000)
         }
     });
-    hash.inviter = new Account(that.session, json.inviter);
+    if (json.inviter) {
+        hash.inviter = new Account(that.session, json.inviter);
+    }
     this.items = _.map(json.items, function (item) {
         return new ThreadItem(that.session, item);
     });
