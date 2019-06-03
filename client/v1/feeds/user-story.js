@@ -4,7 +4,7 @@ var Media = require('../media');
 
 function UserStory(session, userIds) {
     this.session = session;
-    this.userIds = userIds.map( id => String(id) );
+    this.userIds = userIds.map(id => String(id));
 }
 
 UserStory.prototype.get = function () {
@@ -18,9 +18,9 @@ UserStory.prototype.get = function () {
         })
         .signPayload()
         .send()
-        .then(function(data) {
-          return _.map(data.reels[that.userIds].items, function (medium) {
-              return new Media(that.session, medium);
+        .then(function (data) {
+            return _.mapValues(data.reels, function (medium) {
+                return new Media(that.session, medium);
             });
         });
 };
