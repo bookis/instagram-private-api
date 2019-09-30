@@ -68,7 +68,7 @@ const ROUTES = {
     exploreFeed: 'discover/explore/?is_prefetch=<%=is_prefetch%>&is_from_promote=false&timezone_offset=2&session_id=<%=session_id%>&supported_capabilities_new=<%=supported_capabilities_new%>&max_id=0&module=explore_popular',
     inbox: 'direct_v2/inbox/?persistentBadging=true&use_unified_inbox=true<%= cursor ? ("&cursor=" + cursor) : "" %>',
     inboxPending: 'direct_v2/pending_inbox/<%= maxId ? ("?max_id=" + maxId) : "" %>',
-    threads: 'direct_v2/threads/?user_ids=<%= JSON.stringify(threads) %>',
+    threads: 'direct_v2/threads/?user_ids=<%= threads %>',
     threadsShow: 'direct_v2/threads/<%= threadId %>/<%= cursor ? ("?cursor=" + cursor) : "" %>',
     threadsSeen: 'direct_v2/threads/<%= threadId %>/items/<%= itemId %>/seen/',
     threadsItemDelete: 'direct_v2/threads/<%= threadId %>/items/<%= itemId %>/delete/',
