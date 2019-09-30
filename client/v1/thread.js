@@ -118,22 +118,6 @@ Thread.prototype.approve = function () {
         .send();
 };
 
-Thread.byUserIds = function (session, ids) {
-    if(_.isEmpty(ids))
-        throw new Error("`ids` property is required!")
-    return new Request(session)
-        .setMethod('GET')
-        .generateUUID()
-        .setResource('threads', {
-            threads: ids,
-        })
-        .send()
-        .then(function(json) {
-            return new Thread(session, json.thread)
-        })
-};
-
-
 Thread.prototype.hide = function () {
     var that = this;
     return this.request()
@@ -249,6 +233,21 @@ Thread.approveAll = function (session) {
         .generateUUID()
         .setResource('threadsApproveAll')
         .send();
+};
+
+Thread.byUserIds = function (session, ids) {
+    if(_.isEmpty(ids))
+        throw new Error("`ids` property is required!")
+    return new Request(session)
+        .setMethod('GET')
+        .generateUUID()
+        .setResource('threads', {
+            threads: ids,
+        })
+        .send()
+        .then(function(json) {
+            return new Thread(session, json.thread)
+        })
 };
 
 
