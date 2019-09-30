@@ -118,15 +118,19 @@ Thread.prototype.approve = function () {
         .send();
 };
 
-Thread.prototype.byUserIds = function (userIds) {
-    var that = this;
-    return this.request()
+Thread.byUserIds = function (session, ids) {
+    if(_.isEmpty(ids))
+        throw new Error("`ids` property is required!")
+    return new Request(session)
         .setMethod('GET')
         .generateUUID()
         .setResource('threads', {
-            threads: userIds,
+            threads: ids,
         })
-        .send();
+        .send()
+        .then(function(json) {
+            return new Thread(session, json.thread)
+        })
 };
 
 
