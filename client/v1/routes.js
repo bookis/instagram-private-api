@@ -12,15 +12,15 @@ _.each(CONSTANTS.WEB_ROUTES, function (val, key) {
 });
 
 exports.getUrl = function(key, data) {
-    if(!_.isFunction(URLs[key])) 
+    if(!_.isFunction(URLs[key]))
         throw new Error("Url with key `"+ key +"` is not available");
-    return CONSTANTS.API_ENDPOINT + URLs[key](data || {});   
+    return CONSTANTS.API_ENDPOINT + URLs[key](data || {});
 }
 
 exports.getWebUrl = function(key, data) {
-    if(!_.isFunction(WEB_URLs[key])) 
+    if(!_.isFunction(WEB_URLs[key]))
         throw new Error("Web url with key `"+ key +"` is not available");
-    return CONSTANTS.WEBHOST + WEB_URLs[key](data || {});   
+    return CONSTANTS.WEBHOST + WEB_URLs[key](data || {});
 }
 
 
